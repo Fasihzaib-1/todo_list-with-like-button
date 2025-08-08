@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+.hide{
+        display: none;
+    }
+#task{
+  width: 100%;
+  max-width: 20%;
+  padding: 5px 0;
+  border-radius: 50px;
+}
+#navbar{
+    text-align: center;
+    color: white;
+    background-color:rgb(70, 38, 16);
+    padding: 50px 0px 50px 0px;
+}
+body{
+  font-family: 'Times New Roman', Times, serif;
+}
+#liList{
+    list-style: none;
+    width: 100%;
+    max-width:100%;
+}
+li{
+  padding: 15px ;
+}
+
+#btn{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 8px;
+    border-radius: 50px;
+    border-color: rgb(130, 238, 200);
+    font-family: 'Times New Roman', Times, serif; 
+}
+#addbtn{
+    background-color: black;
+    color: white;
+    border-radius: 50px;
+    border-color: rgb(130, 238, 200);
+    font-family: 'Times New Roman', Times, serif;
+    padding: 0 10px;
+}
+#hide{
+    background-color: #757ca4;
+    display: flex;
+    background-color:rgb(120, 90, 53);
+    justify-content: center;
+    box-shadow: none;
+}
+ul li:nth-child(odd) {
+  background-color: white;
+}
+ul li:nth-child(even) {
+  background-color: rgb(237, 231, 231);
+}
+#hideListBtn{
+      background-color:black;
+      color: white;
+      cursor: pointer;
+      padding:  5px;
+      border-radius: 50px;
+}
+.local{
+  font-size: 15px;
+  padding: 2px;
+  background-color:rgb(70, 38, 16);
+  color: white;
+}
+#count{
+  font-size: 15px;
+  padding: 2px;
+  color: white;
+  background-color:rgb(70, 38, 16);
+}
+.cont{
+  display: flex;
+}
+#tumbs{
+width: 100%;
+max-width: 2%;
+padding: 2px;
+}
+</style>
+<body>
+  <p id="demo"></p>
+     <div id="navbar" >
+        <h1>Your Todo List</h1><br>
+        <form action="">
+         <input id="task" type="text">
+        <button id="addbtn">Add task</button>
+<div class="cont">
+  <p class="local">Likes of people:</p>
+  <p id="count">0</p>
+</div>
+<div class="tu"><p>Press the like button if you love this webiste</p>
+<img src="/img/thumbs-up-solid-full (1).svg" id="tumbs" type="button" onclick="cont()"></div>
+    </form>
+</div>
+<div id="hide">
+ <span id="hideListBtn">Hide List</span></div>
+<ul id="liList">
+<li>Make coffee</li>
+<li>Practice JavaScript</li>
+<li>Walk the cat</li>
+<li>Watch a Treehouse video </li>
+<li>Go swimming</li>
+<li>Play with my guitar</li>
+</ul>
+<button id="btn" onclick="remove()">Remove Task list from end</button>
+<button id="btn" onclick="start()">Remove Task list from start</button>
+</body>
+
+<script>
+function remove() {
+  const btn = document.querySelector("li:last-child");    
+  btn.remove();
+}
+function start() {
+  const btn = document.querySelector("li:first-child");    
+  btn.localStorage.removeItem();
+}
+const liList = document.querySelector('#liList');
+const addTaskBtn = document.querySelector('#addbtn');
+const taskInput = document.querySelector('#task');
+let newlist = [];
+addTaskBtn.addEventListener('click',(e) => {
+  e.preventDefault();
+  const taskText=(taskInput.value.trim());
+  if (taskText !== '') {
+    newlist.push(taskText);
+    const li = document.createElement('li');    
+    li.textContent = taskText;
+    liList.appendChild(li);
+    taskInput.value='';
+  }
+  else{
+    alert('Input Feild is Eempty')
+  }
+})
+
+
+// addTaskBtn.addEventListener('click', (e) => {
+//   e.preventDefault();
+
+
+hideListBtn.addEventListener("click", () => {        
+liList.classList.toggle("hide");
+});
+
+function cont(){
+  if(localStorage.cont){
+    localStorage.cont=Number(localStorage.cont)+1;
+    alert("You liked the website")
+  }
+    else {
+      localStorage.cont=1;
+    }
+    document.getElementById("count").innerHTML=localStorage.cont;
+}
+</script>
+</html>
